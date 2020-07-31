@@ -6,3 +6,7 @@
      margin: 5px;
      padding: 5px;
  }
+
+ [v-cloak]{
+     display: none;
+ }

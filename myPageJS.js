@@ -10,12 +10,14 @@ var app = new Vue({
 	data() {
 		return {
 		heading: "Email Subscribe",
-		email: "example@hulk.com"
+		email: "example@hulk.com",
+		submitted: false
 		}
 	},
 	methods: {
 		submitEmail(){
 			alert(`Submitted your mail ${this.email}`);
+			this.submitted = true; // changing submiited value once email is submited successfully to shoe message.
 		}
 	}
 })

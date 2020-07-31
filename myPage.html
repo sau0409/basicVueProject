@@ -12,13 +12,15 @@
  <div id="app"> <!-- root app id for vue -->
    <div class="container">
     <h1>{{heading}}</h1> <!-- vue render string interpolation  -->
-     <form class="mt-5">
+     <form v-if="!submitted" class="mt-5">
        <div class="form-group">
          <label for="email">Name</label>
          <input type="email" id="email" v-model='email' class="form-control form-control-lg"> <!-- binding value attributr to email variable -->
        </div>
-       <button type="submit" v-on:click="submitEmail" class="btn btn-primary">Submit</button>
+       <button type="submit" v-on:click.prevent="submitEmail" class="btn btn-primary">Submit</button>
      </form>
+     <h3 v-else v-cloak class="mt-5">Thankyou!</h3>
+     <h3 v-show="submitted"  v-cloak class="mt-5">For Subscribing.</h3>
    </div>
  </div>
    
