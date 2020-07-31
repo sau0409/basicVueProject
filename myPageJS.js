@@ -7,8 +7,15 @@
 
 var app = new Vue({
 	el: '#app',  // mounts vue to root div id 
-	data: {
-		heading: "I am vue heading.",
+	data() {
+		return {
+		heading: "Email Subscribe",
 		email: "example@hulk.com"
+		}
+	},
+	methods: {
+		submitEmail(){
+			alert(`Submitted your mail ${this.email}`);
+		}
 	}
 })

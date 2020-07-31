@@ -1,3 +1,8 @@
  :root{
      background-color: teal;
  }
+
+ #app{
+     margin: 5px;
+     padding: 5px;
+ }
