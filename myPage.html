@@ -3,12 +3,22 @@
  
  <head>
    <title>Vue2LearningApp</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
  </head>
  
  <body>
  
  <div id="app"> <!-- root app id for vue -->
-   <h1>{{heading}}</h1> <!-- vue render  -->
+   <h1>{{heading}}</h1> <!-- vue render string interpolation  -->
+   <div class="container">
+     <form class="mt-5">
+       <div class="form-group">
+         <label for="email">Name</label>
+         <input type="email" id="email" v-bind:value="email" class="form-control form-control-lg">
+       </div>
+       <button type="submit" class="btn btn-primary">Submit</button>
+     </form>
+   </div>
  </div>
    
    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- vue cdn --> 

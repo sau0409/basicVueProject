@@ -6,8 +6,9 @@
 // creating vue instance
 
 var app = new Vue({
-	el: '#app',  // root div id 
+	el: '#app',  // mounts vue to root div id 
 	data: {
-		heading: "I am vue heading." // variable
+		heading: "I am vue heading.",
+		email: "example@hulk.com"
 	}
 })
