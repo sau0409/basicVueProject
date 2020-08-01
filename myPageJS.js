@@ -11,12 +11,18 @@ var app = new Vue({
 	el: '#app', // mounts vue to root div id 
 	data() {
 		return {
-			heading: "Astronomy Picture By NASA",
+			heading: "Integrating with NASA",
+			heading1: "Astronomy Picture By NASA",
+			heading2: "Near Objects To Earth By NASA",
 			email: "example@hulk.com",
 			submitted: false,
 			imgTitle: "",
 			imgDate: "",
-			imgUrl: ""
+			imgUrl: "",
+			startDate: "",
+			endDate: "",
+			astData: {},
+			astDataKey: []
 		}
 	},
 	methods: {
@@ -35,26 +41,22 @@ var app = new Vue({
 			catch(err){
 				console.log(err);
 			}
+		},
+		async getNearAstFromNasa(startDate, endDate) {
+			const url = "https://api.nasa.gov/neo/rest/v1/feed?api_key=DEMO_KEY";
+			try{
+			   
+				const response = await axios.get(`${url}&start_date=${startDate}&end_date=${endDate}`);
+					console.log(response.data.near_earth_objects);
+					this.astData = response.data.near_earth_objects;
+					for (date in response.data.near_earth_objects) {
+						console.log(date);
+						this.astDataKey.push(date)
+					}
+			}
+			catch(err){
+				console.log(err);
+			}
 		}
 	}
 })
-
-/*
-async function getImageFromNasa(date) {
-
-	try {
-
-		const response2 = await axios.get(`${url}`);
-		console.log(response2);
-
-		const response = await axios.get(`${url}&date=${date}`);
-		console.log(response);
-		this.imgUrl = response;
-
-	}
-	catch(err){
-        console.log(err);
-	}
-
-}
-*/
