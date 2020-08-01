@@ -2,6 +2,6 @@
 
 ## Publishing Astronomy Picture By NASA
 
-Vue projected created while learning vue js framework.
+Sample project in which I have used vue basics.
 
-Axios to fetch data.
+## URL: https://sau0409.github.io/basicVueProject/
