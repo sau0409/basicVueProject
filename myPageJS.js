@@ -59,6 +59,15 @@ var app = new Vue({
 			catch(err){
 				console.log(err);
 			}
+		},
+		getCloseAppDate(data) {
+
+			if(data.close_approach_data[0].close_approach_date_full != null) {
+				return data.close_approach_data[0].close_approach_date_full;
+			}
+			else {
+				return 'NA';
+			}
 		}
 	}
 })

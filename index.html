@@ -36,27 +36,35 @@
           <input v-model="endDate" type="date" id="date">
           <button @click.prevent="getNearAstFromNasa(startDate, endDate)" class="btn btn-primary">Search</button>
         </div>
-        <div v-if="Object.keys(astData).length !== 0" class="output mt-3">
-          <h3>Nearby Objects</h3>
-          <div>
-            <div>
-              <table>
-                <thead>
-                  <tr>
-                    <td><h5>Asteroid Name</h5></td>
-                    <td><h5>Asteroid Diameter Max(meters)</h5></td>
-                    <td><h5>Is Potentially Hazordous</h5></td>
-                  </tr>
-                </thead>
-                <tbody v-for="(date, index) in astData">
-                  <tr v-for="data in date">
-                    <td>{{ data.name }}</td>
-                    <td>{{ data.estimated_diameter.meters.estimated_diameter_max }}</td>
-                    <td>{{ data.is_potentially_hazardous_asteroid }}</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+        <div v-if="Object.keys(astData).length !== 0" class="container output">
+          <h3>Nearby Earth Objects</h3>
+          <div class="card">
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                  <td>
+                    <h5>Asteroid Name</h5>
+                  </td>
+                  <td>
+                    <h5>Asteroid Diameter Max(meters)</h5>
+                  </td>
+                  <td>
+                    <h5>Asteroid Approach Date</h5>
+                  </td>
+                  <td>
+                    <h5>Is Potentially Hazordous</h5>
+                  </td>
+                </tr>
+              </thead>
+              <tbody v-for="(date, index) in astData">
+                <tr v-for="data in date">
+                  <td>{{ data.name }}</td>
+                  <td>{{ data.estimated_diameter.meters.estimated_diameter_max }}</td>
+                  <td>{{ getCloseAppDate(data) }}</td>
+                  <td>{{ data.is_potentially_hazardous_asteroid }}</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
