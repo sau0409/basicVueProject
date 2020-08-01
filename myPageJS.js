@@ -29,7 +29,7 @@ var app = new Vue({
 			try{
 			   
 				const response = await axios.get(`${url}&date=${date}`);
-				    this.imgUrl = response.data.hdurl;
+				    this.imgUrl = response.data.url;
 					this.imgTitle = response.data.title;
 			}
 			catch(err){
