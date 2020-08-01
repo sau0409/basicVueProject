@@ -71,21 +71,30 @@ var app = new Vue({
 		},
 		remove(index, ind) {
 			this.astData[ind].splice(index,1);
+		},
+		getMyStyle(data) {
+            if(data.is_potentially_hazardous_asteroid === true) {
+				return [{ border: 'solid 2px red'}, {color: 'red'}]
+			}
 		}
 	},
 	computed: {
 		closestObj(){
-			let closestDist = 0;
+			let closestDist = 999999999999999999999999999999999;
 			let closestName = "";
 			console.log('in computed');
 			for(let astArr in this.astData) {
-				console.log(astArr);
-				for(let ast=0; ast< astArr.length; ast++) {
-					console.log(astArr[ast]);
-					if(astArr[ast].close_approach_data.length > 0) {
-                   if(astArr[ast].close_approach_data[0].miss_distance.kilometers > closest) {
-					   closestDist = astArr[ast].close_approach_data[0].miss_distance.kilometers;
-					   closestName = astArr[ast].name;
+				console.log(this.astData[astArr]);
+				console.log(this.astData[astArr].length);
+				for(let ast=0; ast< this.astData[astArr].length; ast++) {
+					console.log(this.astData[astArr][ast]);
+					if(this.astData[astArr][ast].close_approach_data.length > 0) {
+                   if(parseInt(this.astData[astArr][ast].close_approach_data[0].miss_distance.kilometers) < closestDist) {
+					   console.log('in check');
+					   console.log(closestName);
+					   console.log(closestDist);
+					   closestDist = this.astData[astArr][ast].close_approach_data[0].miss_distance.kilometers;
+					   closestName = this.astData[astArr][ast].name;
 				   }
 				}
 				}
@@ -96,11 +105,33 @@ var app = new Vue({
 		astNum() {
 			let count =0;
 			for(let astArr in this.astData) {
-				for(let ast=0; ast< astArr.length; ast++) {
+				for(let ast=0; ast< this.astData[astArr].length; ast++) {
                   count++;
 				}
 			}
 			return count;
+		},
+		closestObjPass() {
+			let filteredArr = [];
+            for(let astArr in this.astData) {
+					let objHasMissdata = this.astData[astArr].filter((obj) => {
+                         return obj.close_approach_data.length > 0
+					});
+					filteredArr = filteredArr.concat(objHasMissdata);
+			}
+			console.log(filteredArr);
+
+			let simpleFilteredArr = filteredArr.map((obj) => {
+                 return {name: obj.name, missDist: obj.close_approach_data[0].miss_distance.kilometers}
+			});
+
+			console.log(simpleFilteredArr);
+
+			let sortedSimFilArr = simpleFilteredArr.sort((a,b) => {
+				return a.missDist - b.missDist;
+			})
+
+			return sortedSimFilArr[0];
 		}
 	}
 })

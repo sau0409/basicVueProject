@@ -15,6 +15,7 @@
  .imgClass{
      max-width: 100%;
      max-height: 100%;
+     border: solid 2px black;
  }
 
  

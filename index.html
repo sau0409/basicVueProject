@@ -23,7 +23,9 @@
           </div>
           <div v-if="imgTitle" v-cloak class="mt-5">
             <h3>{{ imgTitle }}</h3>
-            <img class="imgClass" :src="imgUrl">
+            <div>
+              <img :class="{imgClass: true}" :src="imgUrl">
+            </div>
           </div>
         </div>
       </div>
@@ -36,12 +38,12 @@
           <input v-model="endDate" type="date" id="date">
           <button @click.prevent="getNearAstFromNasa(startDate, endDate)" class="btn btn-primary">Search</button>
         </div>
-        <div v-if="Object.keys(astData).length !== 0" v-cloak class="container output">
+        <div v-if="Object.keys(astData).length !== 0" v-cloak class="card mt-3 output">
           <h3>Nearby Earth Objects</h3>
-          <p>Total no. of commets passed {{ astNum }}</p>
-          <p>Closest Object {{ closestObj }}</p>
-          <div class="card">
-            <table class="table">
+          <p>Showing {{ astNum }} results.</p>
+          <p>Closest Asteroid {{ closestObjPass.name }} Missed Earth By {{ closestObjPass.missDist }} Kms</p>
+          <div>
+            <table class="table table-striped">
               <thead class="thead-light">
                 <tr>
                   <td>
@@ -65,7 +67,7 @@
                 </tr>
               </thead>
               <tbody v-for="(date, ind) in astData">
-                <tr v-for="(data, index) in date">
+                <tr v-for="(data, index) in date" :style="getMyStyle(data)" style="color: green;">
                   <td>{{ data.name }}</td>
                   <td>{{ data.estimated_diameter.meters.estimated_diameter_max }}</td>
                   <td>{{ getCloseAppDate(data) }}</td>
