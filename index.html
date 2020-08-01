@@ -54,6 +54,9 @@
                   <td>
                     <h5>Is Potentially Hazordous</h5>
                   </td>
+                  <td>
+                    <h5>Miss Distance</h5>
+                  </td>
                 </tr>
               </thead>
               <tbody v-for="(date, index) in astData">
@@ -62,6 +65,11 @@
                   <td>{{ data.estimated_diameter.meters.estimated_diameter_max }}</td>
                   <td>{{ getCloseAppDate(data) }}</td>
                   <td>{{ data.is_potentially_hazardous_asteroid }}</td>
+                  <td>
+                    <ul v-if="data.close_approach_data[0].close_approach_date_full != null">
+                      <li v-for="(value, key) in data.close_approach_data[0].miss_distance">{{key}} : {{ value }}</li>
+                    </ul>
+                  </td>
                 </tr>
               </tbody>
             </table>
