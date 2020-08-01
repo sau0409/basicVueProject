@@ -5,6 +5,9 @@
 
 // creating vue instance
 
+//repushing
+
+
 
 
 var app = new Vue({
@@ -50,7 +53,6 @@ var app = new Vue({
 					console.log(response.data.near_earth_objects);
 					this.astData = response.data.near_earth_objects;
 					for (date in response.data.near_earth_objects) {
-						console.log(date);
 						this.astDataKey.push(date)
 					}
 			}
