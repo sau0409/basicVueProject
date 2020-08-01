@@ -1,31 +1,49 @@
 <!DOCTYPE html>
 <html>
- 
- <head>
-   <title>Vue2LearningApp</title>
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-   <link rel="stylesheet" href="myPageStyle.css">
- </head>
- 
- <body>
- 
- <div id="app"> <!-- root app id for vue -->
-   <div class="container">
-    <h1>{{heading}}</h1> <!-- vue render string interpolation  -->
-     <form v-if="!submitted" class="mt-5">
-       <div class="form-group">
-         <label for="email">Name</label>
-         <input type="email" id="email" v-model='email' class="form-control form-control-lg"> <!-- binding value attributr to email variable -->
-       </div>
-       <button type="submit" v-on:click.prevent="submitEmail" class="btn btn-primary">Submit</button>
-     </form>
-     <h3 v-else v-cloak class="mt-5">Thankyou!</h3>
-     <h3 v-show="submitted"  v-cloak class="mt-5">For Subscribing.</h3>
-   </div>
- </div>
-   
-   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- vue cdn --> 
-   <script src="myPageJS.js"></script> <!-- loading javascript -->
- </body>
- 
+
+<head>
+  <title>Vue2LearningApp</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="myPageStyle.css">
+</head>
+
+<body>
+
+  <div id="app">
+    <!-- root app id for vue -->
+    <div class="container">
+      <h1>{{heading}}</h1> <!-- vue render string interpolation  -->
+      <div>
+        <div>
+          <div class="dateInput">
+            <label for="date">Date</label>
+            <input v-model="imgDate" type="date" id="date">
+            <button @click.prevent="getImageFromNasa(imgDate)" class="btn btn-primary">Search</button>
+          </div>
+          <div class="mt-5">
+            <h3>{{ imgTitle }}</h3>
+            <img class="imgClass" :src="imgUrl">
+          </div>
+        </div>
+      </div>
+      <div class="subscribe">
+        <form v-if="!submitted" class="mt-5">
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" v-model='email' class="form-control form-control-lg">
+            <!-- binding value attributr to email variable -->
+          </div>
+          <button type="submit" v-on:click.prevent="submitEmail" class="btn btn-primary">Submit</button>
+        </form>
+        <h3 v-else v-cloak class="mt-5">Thankyou!</h3>
+        <h3 v-show="submitted" v-cloak class="mt-5">For Subscribing.</h3>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- vue cdn -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="myPageJS.js"></script> <!-- loading javascript -->
+</body>
+
 </html>
