@@ -68,6 +68,39 @@ var app = new Vue({
 			else {
 				return 'NA';
 			}
+		},
+		remove(index, ind) {
+			this.astData[ind].splice(index,1);
+		}
+	},
+	computed: {
+		closestObj(){
+			let closestDist = 0;
+			let closestName = "";
+			console.log('in computed');
+			for(let astArr in this.astData) {
+				console.log(astArr);
+				for(let ast=0; ast< astArr.length; ast++) {
+					console.log(astArr[ast]);
+					if(astArr[ast].close_approach_data.length > 0) {
+                   if(astArr[ast].close_approach_data[0].miss_distance.kilometers > closest) {
+					   closestDist = astArr[ast].close_approach_data[0].miss_distance.kilometers;
+					   closestName = astArr[ast].name;
+				   }
+				}
+				}
+			}
+			return closestName;
+		},
+
+		astNum() {
+			let count =0;
+			for(let astArr in this.astData) {
+				for(let ast=0; ast< astArr.length; ast++) {
+                  count++;
+				}
+			}
+			return count;
 		}
 	}
 })
