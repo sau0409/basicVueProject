@@ -12,10 +12,11 @@
   <div id="app">
     <!-- root app id for vue -->
     <div class="container">
-      <h1 style="color: white;">{{heading}}</h1> <!-- vue render string interpolation  -->
+      <h1 style="color: white;" :style="headStyle">{{heading}}</h1> <!-- vue render string interpolation  -->
       <astronomyimage></astronomyimage>
       <closestasteroid></closestasteroid>
       <sharefeedback></sharefeedback>
+      <!--<mycomponent @btnclicked="btnClicked" msg="prop"><p slot="below">Bye Slot</p><h3 class="card-header" slot="above" slot-scope="m">Hello Slot {{m.msg}}</h3></mycomponent>-->
     </div>
   </div>
 

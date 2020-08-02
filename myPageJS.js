@@ -7,12 +7,41 @@
 
 //repushing
 
-/*
-Vue.component('mycomponent', {
-	template: '<h1>Hello c1 {{ msg }}</h1>',
-	props: ['msg']
-});
-*/
+let mycomponent = {
+	props: ['msg'],
+	data() {
+		return{
+           colIn: ""
+		}
+	},
+	methods: {
+		btnclicked(colIn){
+			console.log(colIn);
+		   this.$emit('btnclicked', colIn);
+	   }
+	},
+	template: '<div class="card mt-5 p-2">\
+	<slot :msg="msg" name="above">\
+		<h3 class="card-header">Untitiled</h3>\
+		</slot>\
+		<div class="card-body">\
+		<h1>Hello {{ msg }}!</h1>\
+		<div>\
+		<label for="colIn">Enter the color for main Heading.</label>\
+		<input id="colIn" v-model="colIn" type="text">\
+		</div>\
+		<div>\
+		<button class="btn btn-primary" @click="btnclicked(colIn)">ChangeAppHeadingColor</button>\
+		</div>\
+		<slot name="below">\
+		<p>Default Footer</p>\
+		</slot>\
+		</div>\
+		</div>'
+	
+}
+
+
 //not loaded yet
 
 let astronomyimage = {
@@ -39,10 +68,9 @@ let astronomyimage = {
 	watch: {
 		imgDate(newValue, oldValue) {
 
-			if(newValue == undefined) {
-               
-			}
-			else {
+			if (newValue == undefined) {
+
+			} else {
 				this.getImageFromNasa(newValue);
 			}
 
@@ -51,8 +79,8 @@ let astronomyimage = {
 		}
 	},
 	template: '<div class="card mt-5 p-2">\
-    <div class="astronomyImg">\
-        <h3 class="card-header">{{heading1}}</h3>\
+	<div class="astronomyImg">\
+		<h3 class="card-header">{{heading1}}</h3>\
         <div class="card-body">\
           <div class="dateInput">\
             <label for="date">Date</label>\
@@ -259,7 +287,7 @@ let sharefeedback = {
 	  <div class="form-group">\
 	  <div>\
 	  <label for="feedbackArea">Feedback : </label>\
-	  <textarea id="feedbackArea" v-mode="feedback"></textarea>\
+	  <textarea id="feedbackArea" v-model="feedback"></textarea>\
 	  </div>\
 	  <div>\
 		<label for="email">Email</label>\
@@ -278,11 +306,19 @@ var app = new Vue({
 	components: {
 		astronomyimage,
 		closestasteroid,
-		sharefeedback
+		sharefeedback,
+		mycomponent
 	},
 	data() {
 		return {
 			heading: "Integrating with NASA",
+			headStyle: {color: 'green'}
+		}
+	},
+	methods: {
+		btnClicked(colIn){
+			console.log(`button clicked in component ${colIn}`);
+			this.headStyle.color = colIn;
 		}
 	}
 })
