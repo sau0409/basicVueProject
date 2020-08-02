@@ -12,91 +12,10 @@
   <div id="app">
     <!-- root app id for vue -->
     <div class="container">
-      <h1>{{heading}}</h1> <!-- vue render string interpolation  -->
-      <div class="astronomyImg mt-5">
-        <h2>{{heading1}}</h2>
-        <div>
-          <div class="dateInput">
-            <label for="date">Date</label>
-            <input v-model="imgDate" type="date" id="date">
-            <button @click.prevent="getImageFromNasa(imgDate)" class="btn btn-primary">Search</button>
-          </div>
-          <div v-if="imgTitle" v-cloak class="mt-5">
-            <h3>{{ imgTitle }}</h3>
-            <div>
-              <img :class="{imgClass: true}" :src="imgUrl">
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="nearAst mt-5">
-        <h2>{{ heading2 }}</h2>
-        <div class="dateInput">
-          <label for="date">Start Date</label>
-          <input v-model="startDate" type="date" id="date">
-          <label for="date">End Date</label>
-          <input v-model="endDate" type="date" id="date">
-          <button @click.prevent="getNearAstFromNasa(startDate, endDate)" class="btn btn-primary">Search</button>
-        </div>
-        <div v-if="Object.keys(astData).length !== 0" v-cloak class="card mt-3 output">
-          <h3>Nearby Earth Objects</h3>
-          <p>Showing {{ astNum }} results.</p>
-          <p>Closest Asteroid {{ closestObjPass.name }} Missed Earth By {{ closestObjPass.missDist }} Kms</p>
-          <div>
-            <table class="table table-striped">
-              <thead class="thead-light">
-                <tr>
-                  <td>
-                    <h5>Asteroid Name</h5>
-                  </td>
-                  <td>
-                    <h5>Asteroid Diameter Max(meters)</h5>
-                  </td>
-                  <td>
-                    <h5>Asteroid Approach Date</h5>
-                  </td>
-                  <td>
-                    <h5>Is Potentially Hazordous</h5>
-                  </td>
-                  <td>
-                    <h5>Miss Distance</h5>
-                  </td>
-                  <td>
-                    <h5>Remove</h5>
-                  </td>
-                </tr>
-              </thead>
-              <tbody v-for="(date, ind) in astData">
-                <tr v-for="(data, index) in date" :style="getMyStyle(data)" style="color: green;">
-                  <td>{{ data.name }}</td>
-                  <td>{{ data.estimated_diameter.meters.estimated_diameter_max }}</td>
-                  <td>{{ getCloseAppDate(data) }}</td>
-                  <td>{{ data.is_potentially_hazardous_asteroid }}</td>
-                  <td>
-                    <ul v-if="data.close_approach_data[0].close_approach_date_full != null">
-                      <li v-for="(value, key) in data.close_approach_data[0].miss_distance">{{key}} : {{ value }}</li>
-                    </ul>
-                  </td>
-                  <td>
-                    <button class="btn btn-warning" @click="remove(index, ind)">Remove</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div class="subscribe">
-        <form v-if="!submitted" class="mt-5">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" v-model='email' class="form-control form-control-lg">
-          </div>
-          <button type="submit" v-on:click.prevent="submitEmail" class="btn btn-primary">Submit</button>
-        </form>
-        <h3 v-else v-cloak class="mt-5">Thankyou!</h3>
-        <h3 v-show="submitted" v-cloak class="mt-5">For Subscribing.</h3>
-      </div>
+      <h1 style="color: white;">{{heading}}</h1> <!-- vue render string interpolation  -->
+      <astronomyimage></astronomyimage>
+      <closestasteroid></closestasteroid>
+      <sharefeedback></sharefeedback>
     </div>
   </div>
 
