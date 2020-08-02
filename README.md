@@ -10,4 +10,6 @@ Components:
 1: Astronomy Picture by nasa on users date input.
 2: Closest Asteroids passed near by earth data. 
 
+### bootstrap for styling
+
 ## URL: https://sau0409.github.io/basicVueProject/
