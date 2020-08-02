@@ -13,6 +13,7 @@ Vue.component('mycomponent', {
 	props: ['msg']
 });
 */
+//not loaded yet
 
 let astronomyimage = {
 	data() {
